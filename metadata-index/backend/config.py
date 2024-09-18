@@ -1,29 +1,29 @@
-CDK_APP_NAME = "[APP-STACK_NAME]"
+CDK_APP_NAME = "almvAhiIndex"
 
 #AHI settings: This should be set regardless of the mode.
 #The datstore ARN of the AHI datastore. You can find this value in the AHI Web console on your AWS account.
-AHI_DATASTORE_ARN = "arn:aws:medical-imaging:[REGION]:[ACCOUNT_NUMBER]:datastore/[DATASTORE_ID]"
+AHI_DATASTORE_ARN = "arn:aws:medical-imaging:us-east-1:767397949481:datastore/617156b243b84117adb9d33dd32588f7"
 #The bucket specified as the output s3 location for the AHI import jobs.
-AHI_IMPORT_OUPUT_BUCKET_ARN = "arn:aws:s3:::[AHI_OUTPUT_BUCKET_NAME]"
+AHI_IMPORT_OUPUT_BUCKET_ARN = "arn:aws:s3:::alim-us-east1-dev-imaging-output"
 
 #Note that to use RDBMS mode requires to havve a VPC. Make sure to set USE_PVC to True in the VPC config below.
 RDBMS_CONFIG = {
-    "enabled" : False,
+    "enabled" : True,
     #Wether to populate the instance level tags in the instance table or not.
     "populate_instance_level" : True,
     #Wether to populate the frame level tags in the frame table or not. If this is set to True, the instance level tags will also be populated.
     "populate_frame_level" : True,
-    "db_name" : "ahiindex",
+    "db_name" : "almvahiindex",
     "min_acu_capacity" : 1,
     "max_acu_capacity" : 16
 }
 
 DATALAKE_CONFIG = {
-    "enabled" : True,
+    "enabled" : False,
     #Wether to populate the instance level tags in the AHI datalake or not.
     "populate_instance_level" : True,
-    #If the parameter destination_bucket_name is left empty the soltuion will create a random bucket name. If you choose to use a bucket name of your own, make sure that the bucket name is not already in use.
-    "destination_bucket_name" : "",
+    #If the parameter destination_bucket_name is left empty the solution will create a random bucket name. If you choose to use a bucket name of your own, make sure that the bucket name is not already in use.
+    "destination_bucket_name" : "ahilake",
     "deploy_glue_default_config" : True,
 }
 
@@ -89,7 +89,7 @@ LAMBDA_CONFIG = {
         "handler": "lambda_handler",
         "index": "index",
         "timeout": 2,
-        "memory": 4096,
+        "memory": 3008,
         "layers": [ "mysqlConnector", "mysqlConnectionFactory" , "AHIClientFactory"],
         "reserved_concurrency": 0,
         "envs": {},

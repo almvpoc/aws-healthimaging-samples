@@ -105,7 +105,7 @@ function Auth({ visible, setVisible }) {
             }
         >
             <ThemeProvider theme={theme} colorMode={colorMode}>
-                <Authenticator components={authUiComponents}>
+                <Authenticator hideSignUp components={authUiComponents}>
                     <Box variant="p" textAlign="center">
                         You will be redirected shortly.
                     </Box>
